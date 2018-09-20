@@ -127,7 +127,11 @@ function ChunkDecoder:DecodeInstruction(chunk, iIdx, instruction)
 
 	local success, err = pcall(function()
 		name = instructionData.N;
-		instruct = instruct .. name .. "\t";
+		if name ~= "GETGLOBAL" then 
+      instruct = instruct .. name .. "\t"; 
+    else
+      instruct = instruct .. name;
+    end
 		if name == "GETGLOBAL" then
 			instruct = instruct .. ChunkDecoder:GetArgs(instruction, instructionData);
 			instruct = instruct .. "\t; " .. chunk.constants[instruction.Bx].data;
