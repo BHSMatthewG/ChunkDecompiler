@@ -1,7 +1,7 @@
 local ChunkDecoder = {
-    cIdx = 0;
-    iIdx = 0;
-    bytecode = {
+  cIdx = 0;
+  iIdx = 0;
+  bytecode = {
 	[0] = {N="MOVE", Args={"A", "B"}};
 	[1] = {N="LOADK", Args={"A", "Bx"}};
 	[2] = {N="LOADBOOL", Args={"A", "B", "C"}};
@@ -128,9 +128,9 @@ function ChunkDecoder:DecodeInstruction(chunk, iIdx, instruction)
 	local success, err = pcall(function()
 		name = instructionData.N;
 		if name ~= "GETGLOBAL" then 
-      instruct = instruct .. name .. "\t"; 
+      instruct = instruct .. string.lower(name) .. "\t"; 
     else
-      instruct = instruct .. name;
+      instruct = instruct .. string.lower(name);
     end
 		if name == "GETGLOBAL" then
 			instruct = instruct .. ChunkDecoder:GetArgs(instruction, instructionData);
