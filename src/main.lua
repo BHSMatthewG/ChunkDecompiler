@@ -127,27 +127,27 @@ function ChunkDecoder:DecodeInstruction(chunk, iIdx, instruction)
 
 	local success, err = pcall(function()
 		name = instructionData.N;
-		instruct = instruct .. name .. "	";
+		instruct = instruct .. name .. "\t";
 		if name == "GETGLOBAL" then
 			instruct = instruct .. ChunkDecoder:GetArgs(instruction, instructionData);
-			instruct = instruct .. "	; " .. chunk.constants[instruction.Bx].data;
+			instruct = instruct .. "\t; " .. chunk.constants[instruction.Bx].data;
 		elseif name == "LOADK" then
 			local key = chunk.constants[instruction.Bx].data;
 			if (tonumber(key) ~= nil) then else key = '"' .. key .. '"' end
 			instruct = instruct .. ChunkDecoder:GetArgs(instruction, instructionData);
-			instruct = instruct .. "	; " .. key;
+			instruct = instruct .. "\t; " .. key;
 		elseif name == "CLOSURE" then
 			local key = string.upper(string.gsub(tostring(chunk.prototypes[instruction.Bx]), 'table: ', ''));
 			key = string.gsub(key, "X", '0');
 			instruct = instruct .. ChunkDecoder:GetArgs(instruction, instructionData);
-			instruct = instruct .. "	; " .. key;
+			instruct = instruct .. "\t; " .. key;
 		elseif name == "SETGLOBAL" then
 			instruct = instruct .. ChunkDecoder:GetArgs(instruction, instructionData);
-			instruct = instruct .. "	; " .. chunk.constants[instruction.Bx].data;
+			instruct = instruct .. "\t; " .. chunk.constants[instruction.Bx].data;
 		elseif name == "JMP" then
 			local jmp = iIdx + instruction.sBx + 1; -- Adds 1 for the current instruction lol
 			instruct = instruct .. ChunkDecoder:GetArgs(instruction, instructionData);
-			instruct = instruct .. "	; --> to " .. jmp;
+			instruct = instruct .. "\t; --> to " .. jmp;
 		else
 			instruct = instruct .. ChunkDecoder:GetArgs(instruction, instructionData);
 		end
