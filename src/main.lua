@@ -77,7 +77,7 @@ function ChunkDecoder:DecodeChunk(chunk)
 end
 
 function ChunkDecoder:GetArgs(instruction, instructionData)
-	local Args = "";
+	local Args = "\t";
 	if instructionData.N == "SETTABLE" then
 		for _,arg in pairs(instructionData.Args) do
 			if arg == "B" then
