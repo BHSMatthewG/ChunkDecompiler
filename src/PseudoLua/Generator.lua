@@ -1,10 +1,10 @@
 local PseudoLua = {};
 
 function PseudoLua:GeneratePseudo(chunk)
-  local ret = ".function\n";
+  local ret = "[0]\t.function\n";
   local PC = 1;
   for _,instruction in pairs(chunk.instructions) do
-    ret = ret .. "." .. PseudoLua:GenerateInstruction(chunk, instruction, PC) .. "\n";
+    ret = ret .. "[" .. PC .. "]\t." .. PseudoLua:GenerateInstruction(chunk, instruction, PC) .. "\n";
     PC = PC+1;
   end
   return ret;
@@ -12,11 +12,11 @@ end
 
 function PseudoLua:GenerateInstruction(chunk, instruct, PC)
   local pseudoInstructions = {
-    [5] = function(ins)
+    [5] = function(ins) -- LUAC GETGLOBAL
       return "get " .. chunk.constants[ins.Bx].data;
     end,
-    [1] = function(ins)
-      local x = "load ";
+    [1] = function(ins) -- LUAC LOADK
+      local x = "local ";
       local c = chunk.constants[ins.Bx].data;
       if (tonumber(c) ~= nil) then
         x = x .. c;
@@ -25,7 +25,7 @@ function PseudoLua:GenerateInstruction(chunk, instruct, PC)
       end
       return x;
     end,
-    [28] = function(ins)
+    [28] = function(ins) -- LUAC CALL
       if (chunk.instructions[PC-1].opcode == 1) then
         local e = chunk.constants[chunk.instructions[PC-1].Bx].data;
         if (tonumber(e) == nil) then
@@ -36,13 +36,22 @@ function PseudoLua:GenerateInstruction(chunk, instruct, PC)
         return "call(args)";
       end
     end,
-    [30] = function(ins)
+    [30] = function(ins) -- LUAC RETURN
       if (ins.B ~= 1) and (ins.A ~= 0) then
         return "return";
       else
         return "end";
       end
     end,
+    [22] = function(ins) -- LUAC JMP
+      return "goto line: " .. PC+ins.sBx + 1
+    end,
   };
-  return pseudoInstructions[instruct.opcode](instruct);
+  if (pseudoInstructions[instruct.opcode] ~= nil) then
+    return pseudoInstructions[instruct.opcode](instruct);
+  else
+    return "undefined"
+  end
 end
+
+return PseudoLua
