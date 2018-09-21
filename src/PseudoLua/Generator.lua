@@ -1,7 +1,7 @@
 local PseudoLua = {};
 
 function PseudoLua:GeneratePseudo(chunk)
-  local ret = "";
+  local ret = "function\n";
   
   return ret;
 end
