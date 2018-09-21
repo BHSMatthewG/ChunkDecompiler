@@ -6,4 +6,8 @@ function PseudoLua:GeneratePseudo(chunk)
   return ret;
 end
 
+function PseudoLua:GenerateInstruction(instruct)
+  
+end
+
 return PseudoLua
