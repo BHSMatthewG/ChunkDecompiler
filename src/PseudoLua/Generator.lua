@@ -1,0 +1,3 @@
+local PseudoLua = {};
+
+return PseudoLua
