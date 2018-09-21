@@ -1,10 +1,25 @@
 local PseudoLua = {};
 
 function PseudoLua:GeneratePseudo(chunk)
-  local ret = "[0]\t.function\n";
+  local ret = "[0]\t.function(";
+  local acount = 0;
+  for acount = 1, chunk.arguments do
+    if (chunk.arguments == acount) then
+      ret = ret .. "arg" .. acount;
+    else
+      ret = ret .. "arg" .. acount .. ",";
+    end
+  end
+  ret = ret .. ")\n";
   local PC = 1;
   for _,instruction in pairs(chunk.instructions) do
-    ret = ret .. "[" .. PC .. "]\t." .. PseudoLua:GenerateInstruction(chunk, instruction, PC) .. "\n";
+    ret = ret .. "[" .. PC .. "]\t";
+    local r = PseudoLua:GenerateInstruction(chunk, instruction, PC);
+    if (r == "end") then
+      ret = ret .. "." .. r .. "\n";
+    else
+      ret = ret .. "\t." .. r .. "\n";
+    end
     PC = PC+1;
   end
   return ret;
