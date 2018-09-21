@@ -2,7 +2,6 @@ local PseudoLua = {};
 
 function PseudoLua:GeneratePseudo(chunk)
   local ret = "[0]\t.function(";
-  local acount = 0;
   for acount = 1, chunk.arguments do
     if (chunk.arguments == acount) then
       ret = ret .. "arg" .. acount;
