@@ -13,10 +13,10 @@ end
 function PseudoLua:GenerateInstruction(chunk, instruct, PC)
   local pseudoInstructions = {
     [5] = function(ins)
-      return chunk.constants[ins.Bx].data;
+      return "get " .. chunk.constants[ins.Bx].data;
     end,
     [1] = function(ins)
-      local x = "loadk ";
+      local x = "load ";
       local c = chunk.constants[ins.Bx].data;
       if (tonumber(c) ~= nil) then
         x = x .. c;
@@ -46,5 +46,3 @@ function PseudoLua:GenerateInstruction(chunk, instruct, PC)
   };
   return pseudoInstructions[instruct.opcode](instruct);
 end
-
-return PseudoLua;
