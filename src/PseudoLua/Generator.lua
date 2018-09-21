@@ -2,7 +2,9 @@ local PseudoLua = {};
 
 function PseudoLua:GeneratePseudo(chunk)
   local ret = "function\n";
-  
+  for _,instruction in pairs(chunk.instructions) do
+    ret = ret .. "\t" .. PseudoLua:GenerateInstruction(chunk, instruction) .. "\n";
+  end
   return ret;
 end
 
