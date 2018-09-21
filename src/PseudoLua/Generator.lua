@@ -1,36 +1,46 @@
 local PseudoLua = {};
 
 function PseudoLua:GeneratePseudo(chunk)
-  local ret = "function\n";
+  local ret = ".function\n";
+  local PC = 1;
   for _,instruction in pairs(chunk.instructions) do
-    ret = ret .. "\t" .. PseudoLua:GenerateInstruction(chunk, instruction) .. "\n";
+    ret = ret .. "." .. PseudoLua:GenerateInstruction(chunk, instruction, PC) .. "\n";
+    PC = PC+1;
   end
   return ret;
 end
 
-function PseudoLua:GenerateInstruction(chunk, instruct)
+function PseudoLua:GenerateInstruction(chunk, instruct, PC)
   local pseudoInstructions = {
     [5] = function(ins)
       return chunk.constants[ins.Bx].data;
     end,
     [1] = function(ins)
-      local x = "";
+      local x = "loadk ";
       local c = chunk.constants[ins.Bx].data;
       if (tonumber(c) ~= nil) then
-        x = c;
+        x = x .. c;
       else
-        x = "'" .. c .. "'";
+        x = x .. "'" .. c .. "'";
       end
       return x;
     end,
     [28] = function(ins)
-      return "()";
+      if (chunk.instructions[PC-1].opcode == 1) then
+        local e = chunk.constants[chunk.instructions[PC-1].Bx].data;
+        if (tonumber(e) == nil) then
+          e = "'" .. e .. "'";
+        end
+        return "call(" .. e .. ")"
+      else
+        return "call(args)";
+      end
     end,
     [30] = function(ins)
       if (ins.B ~= 1) and (ins.A ~= 0) then
         return "return";
       else
-        return "";
+        return "end";
       end
     end,
   };
