@@ -29,9 +29,12 @@ function PseudoLua:GenerateInstruction(chunk, instruct)
     [30] = function(ins)
       if (ins.B ~= 1) and (ins.A ~= 0) then
         return "return";
+      else
+        return "";
       end
     end,
   };
+  return pseudoInstructions[instruct.opcode](instruct);
 end
 
-return PseudoLua
+return PseudoLua;
