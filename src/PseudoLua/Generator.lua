@@ -6,8 +6,30 @@ function PseudoLua:GeneratePseudo(chunk)
   return ret;
 end
 
-function PseudoLua:GenerateInstruction(instruct)
-  
+function PseudoLua:GenerateInstruction(chunk, instruct)
+  local pseudoInstructions = {
+    [5] = function(ins)
+      return chunk.constants[ins.Bx].data;
+    end,
+    [1] = function(ins)
+      local x = "";
+      local c = chunk.constants[ins.Bx].data;
+      if (tonumber(c) ~= nil) then
+        x = c;
+      else
+        x = "'" .. c .. "'";
+      end
+      return x;
+    end,
+    [28] = function(ins)
+      return "()";
+    end,
+    [30] = function(ins)
+      if (ins.B ~= 1) and (ins.A ~= 0) then
+        return "return";
+      end
+    end,
+  };
 end
 
 return PseudoLua
