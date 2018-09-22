@@ -8,7 +8,7 @@ We can output the lua bytecode instructions, as good as we can. (Referencing to 
 
 ## Results
 
-### ChunkDecompiler
+### ChunkDecompiler (Current As Of 9/21/18)
 ```
  main ([IC: 3]:[PC: 0]:[ADDR: 00AAE980])
 1       [12]    add             2 0 1
