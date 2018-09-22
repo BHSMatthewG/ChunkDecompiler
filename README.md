@@ -40,9 +40,9 @@ function ([IC: 12]:[PC: 1]:[ADDR: 00AAE8E0])
 
 [0]     .function()
 [1]             .local v0 = 1.1125369292536e-308
-[2]             .undefined
-[3]             .undefined
-[4]             .undefined
+[2]             .set[closure] 00ABE9F8
+[3]             .add = stack[R(A)]
+[4]             .if (0 == 2) ~= 0 goto line: 6
 [5]             .goto line: 12
 [6]             .get print
 [7]             .get add
