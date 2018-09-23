@@ -6,7 +6,9 @@
 ```lua
 -- Converts a Instruction to chunkdec bytecode format
 
-ChunkDecompiler:DecompileInstruction(1, chunk, {
+local ChunkDecompiler = require("ChunkDecompiler");
+
+ChunkDecompiler:DecompileInstruction(0, chunk, {
   opcode = 0,
   A = 0,
   B = 1,
@@ -15,5 +17,23 @@ ChunkDecompiler:DecompileInstruction(1, chunk, {
   sBx = nil
 });
 
--- Returns: 0x2     [0]     move            0 1
+-- Returns: 0x1     [0]     move            0 1
+```
+
+### ChunkDecompiler:DecompileChunk(chunk)
+```lua
+-- Decompiles the Chunk's instructions using all the resources
+-- in the chunk, constants, prototypes, etc.
+
+local ChunkDecompiler = require("ChunkDecompiler");
+
+ChunkDecompiler:DecompileChunk({
+  instructions={};
+  prototypes={};
+  constants={};
+  debug={
+    debugLines={};
+  };
+});
+-- Returns nothing as there is no instructions in the chunk.
 ```
