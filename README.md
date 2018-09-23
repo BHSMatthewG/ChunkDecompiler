@@ -8,26 +8,26 @@ We can output the lua bytecode instructions, as good as we can. (Referencing to 
 
 ## Results
 
-### ChunkDecompiler (Current As Of 9/21/18)
+### ChunkDecompiler (Current As Of 9/22/18)
 ```
- main ([IC: 3]:[PC: 0]:[ADDR: 00AAE980])
-1       [12]    add             2 0 1
-2       [30]    return          2 2
-3       [30]    return          0 1
+ main[NUPV 0, NARG 2, PC 0, IC 3, CC 0, FLIN 7]
+0x1     [12]    add             2 0 1
+0x2     [30]    return          2 2
+0x3     [30]    return          0 1
 
-function ([IC: 12]:[PC: 1]:[ADDR: 00AAE8E0])
-1       [1]     loadk           0 0     ; 1.1125369292536e-308
-2       [36]    closure         1 0     ; 00AAE980
-3       [7]     setglobal       1 1     ; add
-4       [23]    eq              0 0 256
-5       [22]    jmp             6       ; --> to 12
-6       [5]     getglobal       1 2     ; print
-7       [5]     getglobal       2 1     ; add
-8       [1]     loadk           3 3     ; 2
-9       [1]     loadk           4 3     ; 2
-10      [28]    call            2 3 0
-11      [28]    call            1 0 1
-12      [30]    return          0 1
+chunk[NUPV 0, NARG 0, PC 0, IC 12, CC 3, FLIN 5]
+0x1     [1]     loadk           0 0     ; 1.1125369292536e-308
+0x2     [36]    closure         1 0     ; 00A341A8
+0x3     [7]     setglobal       1 1     ; add
+0x4     [23]    eq              0 0 2
+0x5     [22]    jmp             6       ; Jump to Address 0xC
+0x6     [5]     getglobal       1 3     ; print
+0x7     [5]     getglobal       2 1     ; add
+0x8     [1]     loadk           3 2     ; 2
+0x9     [1]     loadk           4 2     ; 2
+0xA     [28]    call            2 3 0
+0xB     [28]    call            1 0 1
+0xC     [30]    return          0 1
 ```
 
 ### ChunkDecompiler PseudoLua (Current As Of 9/21/18)
