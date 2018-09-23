@@ -1,3 +1,5 @@
+local Settings = require("ChunkDecSettings");
+
 local ChunkDecoder = {
     cIdx = 0;
     iIdx = 0;
