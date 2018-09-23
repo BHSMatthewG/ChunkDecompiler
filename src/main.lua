@@ -44,6 +44,12 @@ local ChunkDecoder = {
       [37] = {N="VARARG", Args={"A", "B"}};
       };
   };
+
+local iop = 0;
+for _,newop in pairs(Settings.Opcodes) do
+   ChunkDecoder.bytecode[iop] = newop;
+   iop=iop+1;
+end
   
   function ChunkDecoder:GetSignature(chunk)
       local sig = "";
