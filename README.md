@@ -8,7 +8,7 @@ We can output the lua bytecode instructions, as good as we can. (Referencing to 
 
 ## Results
 
-### ChunkDecompiler (Current As Of 9/22/18)
+### ChunkDecompiler (Current As Of 9/23/18)
 ```
  main[NUPV 0, NARG 2, PC 0, IC 3, CC 0, FLIN 7]
 0x1     [12]    add             2 0 1
@@ -16,8 +16,14 @@ We can output the lua bytecode instructions, as good as we can. (Referencing to 
 0x3     [30]    return          0 1
 
 chunk[NUPV 0, NARG 0, PC 0, IC 12, CC 3, FLIN 5]
+.constant       'add'
+.constant       2
+.constant       'print'
+.constant       1.1125369292536e-308
+
+
 0x1     [1]     loadk           0 0     ; 1.1125369292536e-308
-0x2     [36]    closure         1 0     ; 00A341A8
+0x2     [36]    closure         1 0     ; 00A71288
 0x3     [7]     setglobal       1 1     ; add
 0x4     [23]    eq              0 0 2
 0x5     [22]    jmp             6       ; Jump to Address 0xC
