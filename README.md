@@ -30,25 +30,24 @@ chunk[NUPV 0, NARG 0, PC 0, IC 12, CC 3, FLIN 5]
 0xC     [30]    return          0 1
 ```
 
-### ChunkDecompiler PseudoLua (Current As Of 9/21/18)
+### ChunkDecompiler PseudoLua (Current As Of 9/23/18)
 ```lua
-[0]     .function(arg0, arg1)
-[1]             .add v0 + v1
-[2]             .return
-[3]     .end
+[0x1]   .function f1(arg0, arg1)
+[0x2]           .undefined
+[0x3]           .return
+[0x4]   .end
 
-
-[0]     .function()
-[1]             .local v0 = 1.1125369292536e-308
-[2]             .set[closure] 00ABE9F8
-[3]             .add = stack[R(A)]
-[4]             .if (0 == 2) ~= 0 goto line: 6
-[5]             .goto line: 12
-[6]             .get print
-[7]             .get add
-[8]             .local v3 = 2
-[9]             .local v4 = 2
-[10]            .call(2)
-[11]            .call(args)
-[12]    .end
+[0x1]   .function f2()
+[0x2]           .local v0 = 1.1125369292536e-308
+[0x3]           .pushclosure 00AA1300
+[0x4]           .undefined
+[0x5]           .undefined
+[0x6]           .jump to 0xD
+[0x7]           .get print
+[0x8]           .get add
+[0x9]           .local v3 = 2
+[0xA]           .local v4 = 2
+[0xB]           .call()
+[0xC]           .call()
+[0xD]   .end
 ```
