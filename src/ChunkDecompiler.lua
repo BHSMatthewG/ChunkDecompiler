@@ -27,12 +27,9 @@ end
 --|| Get's Opcode From Name  ||
 --\\========================//
 function ChunkDecompiler:GetOpcodeFromName(name)
-    local OP = 0;
-    for _,instruction in pairs(ChunkDecompiler.Opcodes) do
-        if (instruction[1] == name) then
-            return OP;
-        else
-            OP = OP + 1;
+    for y,instruction in pairs(ChunkDecompiler.Opcodes) do
+        if (instruction.N == name) then
+            return y;
         end
     end
     return -1;
@@ -113,6 +110,7 @@ end
 function ChunkDecompiler:DecompileChunk(chunk)
     local ret = "";
     local PC = 0;
+    local hasConstants = false;
     
     if (#ChunkDecompiler.DecompiledChunks == 0) then
         ret = ret .. " main[";
@@ -126,6 +124,19 @@ function ChunkDecompiler:DecompileChunk(chunk)
     ret = ret .. "CC " .. #chunk.constants .. ", ";
     ret = ret .. "FLIN " .. chunk.first_line .. "]";
     ret = ret .. "\n";
+    for _,constant in pairs(chunk.constants) do
+        local data = constant.data;
+        if (tonumber(data) == nil) then
+            data = "'" .. data .. "'";
+        end
+        ret = ret .. ".constant\t" .. data .. "\n";
+        hasConstants = true;
+    end
+    if (hasConstants) then
+        ret = ret .. "\n";
+        ret = ret .. "\n";
+    end
+
     for _,instruction in pairs(chunk.instructions) do
         ret = ret .. ChunkDecompiler:DecompileInstruction(PC, chunk, instruction) .. "\n";
         PC = PC + 1;
