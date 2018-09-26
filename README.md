@@ -69,3 +69,6 @@ chunk[NUPV 0, NARG 0, PC 0, IC 12, CC 3, FLIN 5]
 [0xC]           .call()
 [0xD]   .end
 ```
+
+## Latest Development Log Video
+[![Development Log #1](http://img.youtube.com/vi/Lsx5oe4gEdg/0.jpg)](http://www.youtube.com/watch?v=Lsx5oe4gEdg)
