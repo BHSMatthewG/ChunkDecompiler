@@ -6,16 +6,19 @@ local PseudoLua = {
 PseudoLua.Opcodes = Settings.PseudoLua.Opcodes;
 
 function PseudoLua:IntToHex(int)
-    local wheel = "0123456789ABCDEF";
-    local result = "";
-    int = int + 1;
-    while int > 0 do
-        local modifier = math.fmod(int, 16);
-        result = string.sub(wheel, modifier+1, modifier+1) .. result;
-        int = math.floor(int / 16);
+    if (Settings.HexAddresses == true) then
+        local wheel = "0123456789ABCDEF";
+        local result = "";
+        int = int + 1;
+        while int > 0 do
+            local modifier = math.fmod(int, 16);
+            result = string.sub(wheel, modifier+1, modifier+1) .. result;
+            int = math.floor(int / 16);
+        end
+        if result == "" then result = "0" end; 
+        return "0x" .. result;
     end
-    if result == "" then result = "0" end;
-    return "0x" .. result;
+    return tostring(int);
 end
 
 function PseudoLua:GetNameFromOpcode(Opcode)
