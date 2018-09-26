@@ -1,4 +1,5 @@
 local Settings = {
+    HexAddresses = true;
     ChunkDecompiler = {
         Opcodes = {
             [0]  = {N="move",      Args={"A", "B"}};
