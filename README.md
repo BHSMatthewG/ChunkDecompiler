@@ -14,6 +14,9 @@ We can output the lua bytecode instructions, as good as we can. (Referencing to 
 
 ### ChunkDecompiler (Current As Of 9/23/18)
 ```
+; Settings:
+; HexAddresses: Enabled
+;
  main[NUPV 0, NARG 2, PC 0, IC 3, CC 0, FLIN 7]
 0x1     [12]    add             2 0 1
 0x2     [30]    return          2 2
@@ -42,6 +45,11 @@ chunk[NUPV 0, NARG 0, PC 0, IC 12, CC 3, FLIN 5]
 
 ### ChunkDecompiler PseudoLua (Current As Of 9/23/18)
 ```lua
+--[[
+-- Settings:
+-- HexAddresses: Enabled
+--]]
+
 [0x1]   .function f1(arg0, arg1)
 [0x2]           .undefined
 [0x3]           .return
