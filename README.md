@@ -5,6 +5,9 @@ A Lua Chunk Decompiler for https://github.com/JustAPerson/lbi/blob/master/src/lb
 I am just starting High School, so It will be hard for me to keep up with update schedules. I will try to update every other day.
 I am sometimes able to push simple Updates for example: HexAddresses Setting Support from school, but for more advanced Updates, For example a planned Update I plan to push this week will be (Jump Lining) where it creates lines from jmp addresses to the address it jumps to. I am hoping to finish this project by the end of my 1st semester, freshmen year. Do not be surprised if I do not update on some days, I am most likely busy with my school work.
 
+I know I haven't updated this in a while, but I am working on a V3 (Will have support for more features like stack emulation)
+Also V3 will have an extensible api for disassembly.
+
 ## How It Works
 When JustAPerson's Lua Bytecode Interpreter decodes a chunk, it will decode all the instructions, prototypes, constants, etc.
 Using this information if we hook a function onto decode_chunk before it returns the decoded chunk.
